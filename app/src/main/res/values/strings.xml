@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">dubbizle - Enes Gemci</string>
+    <string name="action_clear">Clear Filter</string>
+    <string name="api_key">11aa031adfca1e1c01fe7288c5a5ffb3</string>
+    <string name="url">https://api.themoviedb.org/3/</string>
+    <string name="filter">Filter</string>
+    <string name="min_year">Min Year</string>
+    <string name="max_year">Max Year</string>
+    <string name="filter_header">Release Year Filter</string>
+    <string name="nomovie">No movie found</string>
+    <string name="original_title">Original Title:</string>
+    <string name="release_date">Release Date:</string>
+    <string name="overview">Overview:</string>
+    <string name="imdb">IMDB Link:</string>
+    <string name="title">Title</string>
+</resources>

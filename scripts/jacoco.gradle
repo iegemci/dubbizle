@@ -1,0 +1,103 @@
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = '0.8.2'
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+task('jacocoReports') {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports for all variants"
+}
+
+task('jacocoVerifications') {
+    group = "Verification"
+    description = "Generate Jacoco coverage reports for all variants"
+}
+
+variants().all { variant ->
+    def params = prepareJacocoParams(variant)
+    def reportTask = createReportTask(params)
+    def verificationTask = createVerificationTask(params)
+    verificationTask.dependsOn reportTask
+    jacocoReports.dependsOn reportTask
+}
+
+def prepareJacocoParams(variant) {
+    def params = [:]
+    params.variantName = variant.name
+    params.variantCapName = variant.name.capitalize()
+    params.fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*Test*.*',
+            'android/**/*.*',
+            '**/*$*$*.*',
+            '**/*DaggerApplicationComponent*.class',
+            '**/*ApplicationComponent*.class',
+            '**/*_Factory.*',
+            '**/*MembersInjector*.*',
+            '**/*Module.*',
+            '**/*Module*.*',
+            '**/*Generated*.*',
+            '**/*Factory.*',
+            '**/*Behavior.*',
+
+    ]
+    params.classDirectories = files([fileTree(
+            dir: variant.javaCompiler.destinationDir,
+            excludes: params.fileFilter
+    ) + fileTree(
+            dir: "$buildDir/tmp/kotlin-classes/$params.variantName",
+            excludes: params.fileFilter
+    )])
+
+    params.sourceDirectories = files([
+            "src/main/java",
+            "src/main/kotlin",
+            "src/$params.variantName/java",
+            "src/$params.variantName/kotlin"
+    ])
+    params.executionData = files("${buildDir}/jacoco/test${params.variantCapName}UnitTest.exec")
+    return params
+}
+
+def createReportTask(params) {
+    return task(
+            "jacocoTest${params.variantCapName}Report",
+            type: JacocoReport,
+            dependsOn: "test${params.variantCapName}UnitTest") {
+
+        group = "Reporting"
+        description = "Generate Jacoco coverage reports for $params.variantCapName"
+        reports {
+            xml.enabled = true
+            html.enabled = true
+            csv.enabled = false
+        }
+        classDirectories = params.classDirectories
+        sourceDirectories = params.sourceDirectories
+        executionData = params.executionData
+    }
+}
+
+def createVerificationTask(params) {
+    return task("jacoco${params.variantCapName}Verification", type: JacocoCoverageVerification) {
+        sourceDirectories = params.sourceDirectories
+        classDirectories = params.classDirectories
+        executionData = params.executionData
+    }
+}
+
+def variants() {
+    if (project.android.hasProperty('libraryVariants')) {
+        return project.android.libraryVariants
+    } else {
+        return project.android.applicationVariants
+    }
+}

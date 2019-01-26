@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="com.enesgemci.dubbizle.view.NoBounceBehavior">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:statusBarScrim="?attr/colorPrimary">
+
+            <ImageView
+                    android:id="@+id/imageViewPoster"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:transitionName="149"
+                    android:scaleType="fitXY"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/textViewReleaseDateLabel"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/release_date"
+                    android:textStyle="italic"
+                    android:layout_marginStart="@dimen/fab_margin"
+                    style="@style/MovieDetailInput"
+                    app:layout_constraintWidth_percent="0.3"
+                    app:layout_constraintEnd_toStartOf="@id/textViewOriginalTitle"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/textViewReleaseDate"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_marginEnd="@dimen/fab_margin"
+                    app:layout_constraintStart_toEndOf="@id/textViewReleaseDateLabel"
+                    style="@style/MovieDetailInput"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/textViewOriginalTitleLabel"
+                    app:layout_constraintTop_toBottomOf="@id/textViewReleaseDateLabel"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/fab_margin"
+                    style="@style/MovieDetailInput"
+                    android:text="@string/original_title"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toStartOf="@id/textViewOriginalTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent="0.3"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/textViewOriginalTitle"
+                    app:layout_constraintTop_toBottomOf="@id/textViewReleaseDateLabel"
+                    android:layout_width="0dp"
+                    android:layout_marginEnd="@dimen/fab_margin"
+                    app:layout_constraintStart_toEndOf="@id/textViewOriginalTitleLabel"
+                    style="@style/MovieDetailInput"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="wrap_content"/>
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/loadingView"
+                    style="@style/SpinKitView.Small.ThreeBounce"
+                    android:layout_width="75dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/fab_margin"
+                    android:layout_height="75dp"
+                    app:layout_constraintTop_toBottomOf="@id/textViewReleaseDate"
+                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@color/colorAccent"/>
+
+            <androidx.constraintlayout.widget.Group
+                    android:id="@+id/movieDetailsGroup"
+                    android:layout_width="wrap_content"
+                    app:constraint_referenced_ids="textViewOverviewLabel,textViewOverview,textViewImdbLabel,textViewImdb,textViewTitleLabel,textViewTitle"
+                    android:layout_marginTop="@dimen/fab_margin"
+                    app:layout_constraintTop_toBottomOf="@id/textViewReleaseDate"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/textViewTitleLabel"
+                    app:layout_constraintTop_toBottomOf="@id/textViewOriginalTitle"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/fab_margin"
+                    style="@style/MovieDetailInput"
+                    android:text="@string/title"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toStartOf="@id/textViewOriginalTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent="0.3"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/textViewTitle"
+                    app:layout_constraintTop_toBottomOf="@id/textViewOriginalTitle"
+                    android:layout_width="0dp"
+                    android:layout_marginEnd="@dimen/fab_margin"
+                    app:layout_constraintStart_toEndOf="@id/textViewOriginalTitleLabel"
+                    style="@style/MovieDetailInput"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/textViewImdbLabel"
+                    app:layout_constraintTop_toBottomOf="@id/textViewTitleLabel"
+                    android:layout_width="0dp"
+                    app:layout_constraintEnd_toStartOf="@id/textViewImdb"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/imdb"
+                    android:textStyle="italic"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:layout_marginStart="@dimen/fab_margin"
+                    app:layout_constraintWidth_percent="0.3"
+                    style="@style/MovieDetailInput"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/textViewImdb"
+                    app:layout_constraintTop_toBottomOf="@id/textViewTitleLabel"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/textViewImdbLabel"
+                    tools:visibility="visible"
+                    style="@style/MovieDetailInput"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="@dimen/fab_margin"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/textViewOverviewLabel"
+                    app:layout_constraintTop_toBottomOf="@id/textViewImdb"
+                    android:layout_width="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/overview"
+                    android:textStyle="italic"
+                    android:visibility="gone"
+                    android:layout_marginStart="@dimen/fab_margin"
+                    tools:visibility="visible"
+                    style="@style/MovieDetailInput"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/textViewOverview"
+                    app:layout_constraintTop_toBottomOf="@id/textViewOverviewLabel"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    style="@style/MovieDetailInput"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="@dimen/fab_margin"
+                    android:layout_marginEnd="@dimen/fab_margin"
+                    android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

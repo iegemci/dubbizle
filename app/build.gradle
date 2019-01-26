@@ -1,0 +1,122 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: '../scripts/jacoco.gradle'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "com.enesgemci.dubbizle"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+
+        incremental true
+    }
+
+    buildTypes {
+        debug{
+            testCoverageEnabled true
+        }
+        release {
+            testCoverageEnabled true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    lintOptions {
+        warning 'MissingTranslation'
+        abortOnError true
+        warning 'InvalidPackage'
+        warning 'MissingConstraints'
+        warning 'NewApi'
+    }
+}
+
+configurations {
+    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    implementation 'androidx.core:core-ktx:1.1.0-alpha03'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.core:core-ktx:1.0.1'
+
+    implementation 'com.google.android.material:material:1.1.0-alpha02'
+
+    //Kotlin Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0'
+
+    //Coroutines adapter for Retrofit
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+
+    //Okhttp3 logging
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    //Square Retrofit
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    //Dagger
+    kapt "com.google.dagger:dagger-compiler:2.11"
+    implementation "com.google.dagger:dagger:2.11"
+    //    implementation "com.google.dagger:dagger-android-support:+"
+    compileOnly "javax.annotation:jsr250-api:1.0"
+    implementation "com.google.guava:guava:20.0"
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+
+    //Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+
+    //Mosby mvp
+    implementation("com.hannesdorfmann.mosby3:mvp:3.1.0") {
+        exclude group: 'com.hannesdorfmann.mosby3', module: 'utils-fragment'
+    }
+
+    //Eventbus
+    implementation "com.squareup:otto:1.3.8"
+
+    //Joda Time
+    implementation "joda-time:joda-time:2.10"
+
+    // Top Snackbar
+    implementation 'com.androidadvance:topsnackbar:1.1.1'
+
+    //Endless R.V
+    implementation 'com.github.ybq:Endless-RecyclerView:1.0.4'
+
+    //Loading
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.7.6'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+}

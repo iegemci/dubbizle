@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2017.
+  ~
+  ~     "Therefore those skilled at the unorthodox
+  ~      are infinite as heaven and earth,
+  ~      inexhaustible as the great rivers.
+  ~      When they come to an end,
+  ~      they begin again,
+  ~      like the days and months;
+  ~      they die and are reborn,
+  ~      like the four seasons."
+  ~
+  ~ - Sun Tsu, "The Art of War"
+  ~
+  ~ Enes Gemci
+  -->
+
+<resources>
+    <declare-styleable name="MButton">
+        <attr name="gradient_end_color" />
+        <attr name="gradient_orientation" />
+        <attr name="background_type" />
+        <attr name="shape" />
+        <attr name="border_width" />
+        <attr name="border_color" />
+        <attr name="pressed_color" />
+        <attr name="pressed_color_compat" />
+        <attr name="background_color" />
+        <attr name="radius" />
+        <attr name="radius_top_left" />
+        <attr name="radius_top_right" />
+        <attr name="radius_bottom_right" />
+        <attr name="radius_bottom_left" />
+
+        <attr name="b_clickable" format="boolean" />
+        <attr name="showKeys" />
+
+        <attr name="required" />
+        <attr name="keyboard_close_lenght" />
+        <attr name="focus_next_input_lenght" />
+        <attr name="typeface" />
+        <attr name="inputtype" />
+        <attr name="error_key" />
+        <attr name="min_amount_error_key" />
+        <attr name="max_amount_error_key" />
+    </declare-styleable>
+</resources>
